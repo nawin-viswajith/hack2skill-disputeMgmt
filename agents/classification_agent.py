@@ -1,6 +1,5 @@
 from crewai import Agent
-from langchain.tools import Tool
-from langchain.llms import OpenAI
+from langchain_openai import OpenAI
 import json
 from models.schemas import DisputeType, ClassificationResult
 

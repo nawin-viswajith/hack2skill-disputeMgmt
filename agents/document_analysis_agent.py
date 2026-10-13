@@ -1,5 +1,5 @@
 from crewai import Agent
-from langchain.llms import OpenAI
+from langchain_openai import OpenAI
 import json
 from typing import Dict, Any, List
 import base64

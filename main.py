@@ -10,6 +10,7 @@ import os
 import hashlib
 from datetime import datetime
 import secrets
+from dotenv import load_dotenv
 
 # Import agents
 from agents.classification_agent import ClassificationAgent
@@ -17,9 +18,10 @@ from agents.policy_agent import PolicyAgent
 from agents.resolution_agent import ResolutionAgent
 from agents.document_analysis_agent import DocumentAnalysisAgent
 
-app = FastAPI(title="Agentic AI Dispute Handling System", version="1.0.0")
+# Load environment variables from .env (see .env.example for the template)
+load_dotenv()
 
-os.environ["OPENAI_API_KEY"] = "OPENAI_API_KEY"
+app = FastAPI(title="Agentic AI Dispute Handling System", version="1.0.0")
 
 # CORS middleware
 app.add_middleware(
@@ -526,4 +528,8 @@ async def chatbot_question(request: Request):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)     
+    uvicorn.run(
+        app,
+        host=os.getenv("APP_HOST", "0.0.0.0"),
+        port=int(os.getenv("APP_PORT", "8000")),
+    )     
